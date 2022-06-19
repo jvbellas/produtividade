@@ -1,0 +1,34 @@
+#bibliotecas
+
+import time
+import clipboard as clip
+import string
+from time import sleep
+
+print("Este programa retira caracteres especiais de um CPF ou CNPJ")
+sleep(0.8)
+print("basta copiar o documento, colar e apertar enter")
+sleep(0.8)
+print("deseja iniciar?")
+sleep(0.8)
+x = input("digite 's' para iniciar o programa e para encerrá-lo digite '0':\n")
+
+if x == "s":
+        print("Olá!")
+sleep(0.5)
+while x == "s":
+        try:
+            CPF = str(input("CPF: "))
+            saida = ''.join([i for i in CPF if i not in string.punctuation])
+            if int(saida) > 0:
+                    print("documento " + saida + " copiado para a área de transferência")
+                    sleep(0.5)
+                    print("\npodemos continuar\n")
+                    clip.copy(saida)
+            elif int(saida) == 0:
+                    print("encerrando")
+                    break
+        except:
+            print("entrada inválida\nlembre-se de não digitar nenhuma letra, apenas números e caracteres especiais")
+            x = "s"
+exit()

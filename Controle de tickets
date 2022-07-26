@@ -1,0 +1,97 @@
+from tkinter import *
+from tkinter import messagebox
+import string
+import csv
+from csv import writer
+
+class Ticket:
+ def __init__(self):
+
+  self.janela_principal = Tk()
+  self.janela_principal.geometry('650x600')
+  
+  self.frame_cima  = Frame(self.janela_principal) 
+  self.frame_baixo = Frame(self.janela_principal)
+  
+  self.label = Label(self.frame_cima, text='Controle de tickets')
+    
+  self.numero = Label(self.frame_baixo, text='número')
+  self.entrada = Entry(self.frame_baixo, width=30)
+    
+  self.escritorio = Label(self.frame_baixo, text='escritório')
+  self.entrada1 = Entry(self.frame_baixo, width=30)
+    
+  self.clientes = Label(self.frame_baixo, text='clientes')
+  self.entrada2 = Entry(self.frame_baixo, width=30)
+    
+  self.situacao = Label(self.frame_baixo, text='situação')
+  self.entrada3 = Entry(self.frame_baixo, width=30)
+    
+  self.data = Label(self.frame_baixo, text='data')
+  self.entrada4 = Entry(self.frame_baixo, width=30)
+    
+  self.horainicio = Label(self.frame_baixo, text='hora início')
+  self.entrada5 = Entry(self.frame_baixo, width=30)
+    
+  self.horafim = Label(self.frame_baixo, text='hora fim')
+  self.entrada6 = Entry(self.frame_baixo, width=30)
+    
+  self.servico = Label(self.frame_baixo, text='serviço')
+  self.entrada7 = Entry(self.frame_baixo, width=30)
+    
+  self.status = Label(self.frame_baixo, text='status')
+  self.entrada8 = Entry(self.frame_baixo, width=30)
+  
+  self.label.pack()
+  self.numero.pack()
+  self.escritorio.pack()
+  self.clientes.pack()
+  self.situacao.pack()
+  self.data.pack()
+  self.horainicio.pack()
+  self.horafim.pack()
+  self.servico.pack()
+  self.status.pack()
+  self.entrada.pack()
+  self.entrada1.pack()
+  self.entrada2.pack()
+  self.entrada3.pack()
+  self.entrada4.pack()
+  self.entrada5.pack()
+  self.entrada6.pack()
+  self.entrada7.pack()
+  self.entrada8.pack()
+  
+  self.botao = Button(self.frame_baixo, text='Adicionar', command=self.adicionar)
+  self.botao_sair = Button(self.frame_baixo, text='Encerrar', command=self.janela_principal.destroy)
+  
+  self.botao.pack(side='left')
+  self.botao_sair.pack(side='right')
+  
+  self.botao.pack()
+  self.botao_sair.pack()
+  
+  self.frame_cima.pack()
+  self.frame_baixo.pack()
+  
+  mainloop()
+        
+ def adicionar(self):
+    numero = str(self.entrada.get())
+    escritorio = str(self.entrada1.get())
+    clientes = str(self.entrada2.get())
+    situacao = str(self.entrada3.get())
+    data = str(self.entrada4.get())
+    horainicio = str(self.entrada5.get())
+    horafim = str(self.entrada6.get())
+    servico = str(self.entrada7.get())
+    status = str(self.entrada8.get())
+    ticket = [numero, escritorio, clientes, situacao, data, servico, status, horainicio, horafim]
+    messagebox.showinfo('armazenando informações', 'ticket ' + numero + ' está ' + status)
+    with open('Controle de tickets.csv','w') as csvfile:
+        csv.writer(csvfile,delimiter=',').writerow(ticket)
+            
+gui = Ticket()
+
+#criar um banco de dados ou CSV que armazene os tickets que forem sendo criados
+#criar uma função para calcular o tempo gasto com a análise do ticket

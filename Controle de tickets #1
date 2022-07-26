@@ -1,0 +1,102 @@
+#este programa pega os dados inseridos pelo usuário e coloca numa planilha csv
+#é preciso ter salvo um arquivo csv chamado ControleDeTickets com os devidos campos solicitados neste programa
+
+from tkinter import *
+from tkinter import messagebox
+import string
+import csv
+from csv import writer
+
+class Ticket:
+ def __init__(self):
+
+  self.janela_principal = Tk()
+  self.janela_principal.geometry('300x300')
+  
+  self.frame_cima  = Frame(self.janela_principal) 
+  self.frame_baixo = Frame(self.janela_principal)
+  
+  self.label = Label(self.frame_cima, text='Controle de tickets')
+    
+  self.numero = Label(self.frame_baixo, text='número')
+  self.entrada = Entry(self.frame_baixo, width=30)
+    
+  self.escritorio = Label(self.frame_baixo, text='escritório')
+  self.entrada1 = Entry(self.frame_baixo, width=30)
+    
+  self.clientes = Label(self.frame_baixo, text='clientes')
+  self.entrada2 = Entry(self.frame_baixo, width=30)
+    
+  self.situacao = Label(self.frame_baixo, text='situação')
+  self.entrada3 = Entry(self.frame_baixo, width=30)
+    
+  self.data = Label(self.frame_baixo, text='data')
+  self.entrada4 = Entry(self.frame_baixo, width=30)
+    
+  self.horainicio = Label(self.frame_baixo, text='hora início')
+  self.entrada5 = Entry(self.frame_baixo, width=30)
+    
+  self.horafim = Label(self.frame_baixo, text='hora fim')
+  self.entrada6 = Entry(self.frame_baixo, width=30)
+    
+  self.servico = Label(self.frame_baixo, text='serviço')
+  self.entrada7 = Entry(self.frame_baixo, width=30)
+    
+  self.status = Label(self.frame_baixo, text='status')
+  self.entrada8 = Entry(self.frame_baixo, width=30)
+  
+  self.label.grid()
+  self.numero.grid(row=0,column=0)
+  self.escritorio.grid(row=1,column=0)
+  self.clientes.grid(row=2,column=0)
+  self.situacao.grid(row=3,column=0)
+  self.data.grid(row=4,column=0)
+  self.horainicio.grid(row=5,column=0)
+  self.horafim.grid(row=6,column=0)
+  self.servico.grid(row=7,column=0)
+  self.status.grid(row=8,column=0)
+  self.entrada.grid(row=0,column=1)
+  self.entrada1.grid(row=1,column=1)
+  self.entrada2.grid(row=2,column=1)
+  self.entrada3.grid(row=3,column=1)
+  self.entrada4.grid(row=4,column=1)
+  self.entrada5.grid(row=5,column=1)
+  self.entrada6.grid(row=6,column=1)
+  self.entrada7.grid(row=7,column=1)
+  self.entrada8.grid(row=8,column=1)
+  
+  self.botao = Button(self.frame_baixo, text='Adicionar', command=self.adicionar)
+  self.botao_sair = Button(self.frame_baixo, text='Encerrar', command=self.janela_principal.destroy)
+  
+  self.botao.grid()
+  self.botao_sair.grid()
+  
+  self.botao.grid()
+  self.botao_sair.grid()
+  
+  self.frame_cima.grid()
+  self.frame_baixo.grid()
+  
+  mainloop()
+        
+ def adicionar(self):
+    numero = str(self.entrada.get())
+    escritorio = str(self.entrada1.get())
+    clientes = str(self.entrada2.get())
+    situacao = str(self.entrada3.get())
+    data = str(self.entrada4.get())
+    horainicio = str(self.entrada5.get())
+    horafim = str(self.entrada6.get())
+    servico = str(self.entrada7.get())
+    status = str(self.entrada8.get())
+    ticket = [numero, escritorio, clientes, situacao, data, servico, status, horainicio, horafim]
+    messagebox.showinfo('armazenando informações', 'ticket ' + numero + ' está ' + status)
+    with open('ControleDeTickets.csv','a',newline='') as f_object:
+        writer_object = writer(f_object)
+        writer_object.writerow(ticket)
+        f_object.close()
+            
+gui = Ticket()
+
+#criar um banco de dados que armazene os tickets que forem sendo criados
+#criar uma função para calcular o tempo gasto com a análise do ticket e gerar as estatísticas desejadas
